@@ -10,6 +10,7 @@ using Xunit;
 
 namespace WebApi.Tests
 {
+    
     //¯\_(ツ)_/¯
     
     public class ApiTests : IClassFixture<WebApplicationFactory<LMSContext>>, IDisposable
