@@ -10,10 +10,10 @@ using Xunit;
 
 namespace WebApi.Tests
 {
-    
-    
+// ¯\_(ツ)_/¯
+
     //¯\_(ツ)_/¯
-    
+
     public class ApiTests : IClassFixture<WebApplicationFactory<LMSContext>>, IDisposable
     {
         private readonly WebApplicationFactory<LMSContext> _factory;
@@ -24,7 +24,8 @@ namespace WebApi.Tests
             _factory = factory.WithWebHostBuilder(builder =>
                 builder.ConfigureServices(services =>
                 {
-                    var descriptor = services.SingleOrDefault(d => d.ServiceType == typeof(DbContextOptions<LMSContext>));
+                    var descriptor =
+                        services.SingleOrDefault(d => d.ServiceType == typeof(DbContextOptions<LMSContext>));
                     services.Remove(descriptor);
 
                     services.AddDbContext<LMSContext>(options => options.UseInMemoryDatabase("TestDb"));
@@ -41,7 +42,8 @@ namespace WebApi.Tests
         {
             using var scope = _factory.Services.CreateScope();
             var serviceProvider = scope.ServiceProvider;
-            var dbContextOptions = serviceProvider.GetService(typeof(DbContextOptions<LMSContext>)) as DbContextOptions<LMSContext>;
+            var dbContextOptions =
+                serviceProvider.GetService(typeof(DbContextOptions<LMSContext>)) as DbContextOptions<LMSContext>;
 
             var dbContext = new LMSContext(dbContextOptions);
             dbContext.Database.EnsureCreated();
@@ -50,7 +52,7 @@ namespace WebApi.Tests
             return dbContext;
         }
 
-        
+
         [Fact]
         public async Task CreateCourseAndRead()
         {
@@ -68,6 +70,5 @@ namespace WebApi.Tests
 
             Assert.Equal(course.Name, receivedCourse.Name);
         }
-
     }
 }
